@@ -1,6 +1,12 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
+const path = require('path');
+const fs = require('fs');
+const util = require('./util');
+
+
+
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -9,22 +15,45 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+	
+	// 注册命令
+	context.subscriptions.push(vscode.commands.registerCommand('extension.demo.getCurrentFilePath', (uri) => {
+		vscode.window.showInformationMessage(`当前文件(夹)路径是：${uri ? uri.path : '空'}`);
+	}))
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "owo" is now active!');
+	// context.subscriptions.push(vscode.languages.registerDefinitionProvider(['owo'], {
+	// 	provideDefinition
+	// }))
+	// 注册鼠标悬停提示
+	context.subscriptions.push(vscode.languages.registerHoverProvider('owo', {
+    provideHover(document, position, token) {
+			// console.log(document)
+			return new vscode.Hover('I am a hover!');
+    }
+	}))
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
-	});
-
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(vscode.languages.registerCompletionItemProvider('owo', {
+    provideCompletionItems(document, position, token) {
+			
+			const character = document.lineAt(position).text.substr(0, position.character)
+			switch (character) {
+				case 'this.': {
+					return [new vscode.CompletionItem('$el', vscode.CompletionItemKind.Field)]
+				}
+				case 'owo.': {
+					return [
+						new vscode.CompletionItem('tool', vscode.CompletionItemKind.Field),
+						new vscode.CompletionItem('query', vscode.CompletionItemKind.Function),
+						new vscode.CompletionItem('go', vscode.CompletionItemKind.Function),
+					]
+				}
+			}
+		},
+		resolveCompletionItem () {
+			return null
+		},
+		triggerCharacters: ['.']
+	}, '.'))
 }
 exports.activate = activate;
 

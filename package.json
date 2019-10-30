@@ -2,7 +2,7 @@
 	"name": "owo",
 	"displayName": "owo",
 	"description": "",
-	"version": "0.0.5",
+	"version": "0.0.3",
 	"publisher": "puge",
 	"engines": {
 		"vscode": "^1.39.0"
@@ -11,7 +11,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"*"
+		"onLanguage:owo"
 	],
 	"repository": {
     "type": "git",
@@ -19,57 +19,93 @@
   },
 	"main": "./extension.js",
 	"contributes": {
-		"commands": [{
-			"command": "extension.helloWorld",
-			"title": "Hello World",
-			"breakpoints": [
-				{
-					"language": "owo"
+		"commands": [
+      {
+        "command": "vetur.generateGrammar",
+        "title": "Vetur: Generate grammar from `vetur.grammar.customBlocks`"
+      },
+      {
+        "command": "vetur.showCorrespondingVirtualFile",
+        "title": "Vetur: Show corresponding virtual file and sourcemap"
+      },
+      {
+        "command": "vetur.openUserScaffoldSnippetFolder",
+        "title": "Vetur: Open user scaffold snippet folder"
+			},
+			{
+				"command": "extension.demo.getCurrentFilePath",
+				"title": "编译工程",
+				"icon": {
+					"light": "./icon/package.svg",
+					"dark": "./icon/package.svg"
 				}
-			],
-			"languages": [
-				{
-					"id": "owo",
-					"aliases": [
-						"owo",
-						"OWO"
-					],
-					"extensions": [
-						".owo"
-					],
-					"configuration": "./languages/owo-language-configuration.json"
+			}
+    ],
+		"languages": [
+			{
+				"id": "owo",
+				"aliases": [
+					"owo",
+					"OWO"
+				],
+				"extensions": [
+					".owo"
+				],
+				"configuration": "./languages/owo-language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "owo",
+				"scopeName": "source.owo",
+				"path": "./syntaxes/vue-generated.json",
+				"embeddedLanguages": {
+					"text.html.basic": "html",
+					"text.html.vue-html": "vue-html",
+					"text.jade.slm": "slm",
+					"text.pug": "jade",
+					"text.haml": "haml",
+					"text.html.liquid": "liquid",
+					"source.css": "css",
+					"source.css.scss": "scss",
+					"source.css.less": "less",
+					"source.css.postcss": "vue-postcss",
+					"source.sass": "sass",
+					"source.stylus": "stylus",
+					"source.js": "javascript",
+					"source.ts": "typescript",
+					"source.coffee": "coffeescript",
+					"text.html.markdown": "md",
+					"source.yaml": "yaml",
+					"source.json": "json",
+					"source.php": "php",
+					"source.graphql": "graphql"
 				}
-			],
-			"grammars": [
+			},
+			{
+        "path": "./syntaxes/pug/directives.tmLanguage.json",
+        "scopeName": "vue.pug.directives",
+        "injectTo": [
+          "source.owo"
+        ]
+      },
+      {
+        "path": "./syntaxes/pug/interpolations.tmLanguage.json",
+        "scopeName": "vue.pug.interpolations",
+        "injectTo": [
+          "source.owo"
+        ]
+      }
+		],
+		"menus": {
+			"editor/title": [
 				{
-					"language": "owo",
-					"scopeName": "source.owo",
-					"path": "./syntaxes/vue-generated.json",
-					"embeddedLanguages": {
-						"text.html.basic": "html",
-						"text.html.vue-html": "vue-html",
-						"text.jade.slm": "slm",
-						"text.pug": "jade",
-						"text.haml": "haml",
-						"text.html.liquid": "liquid",
-						"source.css": "css",
-						"source.css.scss": "scss",
-						"source.css.less": "less",
-						"source.css.postcss": "vue-postcss",
-						"source.sass": "sass",
-						"source.stylus": "stylus",
-						"source.js": "javascript",
-						"source.ts": "typescript",
-						"source.coffee": "coffeescript",
-						"text.html.markdown": "md",
-						"source.yaml": "yaml",
-						"source.json": "json",
-						"source.php": "php",
-						"source.graphql": "graphql"
-					}
+					"when": "resourceLangId == owo",
+					"command": "extension.demo.getCurrentFilePath",
+					"group": "navigation"
 				}
 			]
-		}]
+		}
 	},
 	"scripts": {
 		"test": "node ./test/runTest.js"
