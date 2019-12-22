@@ -1,11 +1,15 @@
 {
 	"name": "owo",
 	"displayName": "owo",
-	"description": "",
-	"version": "0.0.3",
-	"publisher": "puge",
+	"publisher": "PUGE",
+	"description": "针对owo语言的高亮提示,自动补全",
+	"version": "0.0.5",
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
 	"engines": {
-		"vscode": "^1.39.0"
+		"vscode": "^1.41.0"
 	},
 	"categories": [
 		"Other"
@@ -13,33 +17,9 @@
 	"activationEvents": [
 		"onLanguage:owo"
 	],
-	"repository": {
-		"type": "git",
-		"url": ""
-	},
-	"main": "./modes/extension.js",
+	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
-			{
-				"command": "vetur.generateGrammar",
-				"title": "Vetur: Generate grammar from `vetur.grammar.customBlocks`"
-			},
-			{
-				"command": "vetur.showCorrespondingVirtualFile",
-				"title": "Vetur: Show corresponding virtual file and sourcemap"
-			},
-			{
-				"command": "vetur.openUserScaffoldSnippetFolder",
-				"title": "Vetur: Open user scaffold snippet folder"
-			},
-			{
-				"command": "extension.demo.getCurrentFilePath",
-				"title": "编译工程",
-				"icon": {
-					"light": "./icon/package.svg",
-					"dark": "./icon/package.svg"
-				}
-			}
 		],
 		"languages": [
 			{
@@ -51,7 +31,7 @@
 				"extensions": [
 					".owo"
 				],
-				"configuration": "./languages/owo-language-configuration.json"
+				"configuration": "./src/languages/owo-language-configuration.json"
 			}
 		],
 		"grammars": [
@@ -96,37 +76,30 @@
 					"source.owo"
 				]
 			}
-		],
-		"menus": {
-			"editor/title": [
-				{
-					"when": "resourceLangId == owo",
-					"command": "extension.demo.getCurrentFilePath",
-					"group": "navigation"
-				}
-			]
-		}
+		]
 	},
 	"scripts": {
-		"test": "node ./test/runTest.js"
+		"vscode:prepublish": "yarn run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "yarn run compile",
+		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
-		"@types/mocha": "^5.2.6",
-		"@types/node": "^12.12.21",
-		"@types/vscode": "^1.39.0",
-		"eslint": "^5.13.0",
-		"glob": "^7.1.4",
-		"mocha": "^6.1.4",
-		"typescript": "^3.3.1",
-		"vscode-test": "^1.2.0"
+		"@types/lodash": "^4.14.149",
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.41.0",
+		"glob": "^7.1.5",
+		"mocha": "^6.2.2",
+		"tslint": "^5.20.0",
+		"typescript": "^3.6.4",
+		"vscode-languageserver": "^5.2.1",
+		"vscode-test": "^1.2.2"
 	},
 	"dependencies": {
-		"lodash": "^4.17.15",
-		"vscode": "^1.1.36",
 		"vscode-css-languageservice": "^4.0.2",
-		"vscode-languageclient": "^5.2.1",
-		"vscode-languageserver": "^5.2.1",
 		"vscode-languageserver-types": "^3.14.0"
 	}
 }
