@@ -91,9 +91,6 @@ const util = {
     showInfo: function(info) {
         vscode.window.showInformationMessage(info);
     },
-    findStrInFolder: function(folderPath, str) {
-
-    },
     /**
      * 从某个文件里面查找某个字符串，返回第一个匹配处的行与列，未找到返回第一行第一列
      * @param filePath 要查找的文件

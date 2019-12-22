@@ -14,23 +14,23 @@
 		"onLanguage:owo"
 	],
 	"repository": {
-    "type": "git",
-    "url": ""
-  },
-	"main": "./extension.js",
+		"type": "git",
+		"url": ""
+	},
+	"main": "./modes/extension.js",
 	"contributes": {
 		"commands": [
-      {
-        "command": "vetur.generateGrammar",
-        "title": "Vetur: Generate grammar from `vetur.grammar.customBlocks`"
-      },
-      {
-        "command": "vetur.showCorrespondingVirtualFile",
-        "title": "Vetur: Show corresponding virtual file and sourcemap"
-      },
-      {
-        "command": "vetur.openUserScaffoldSnippetFolder",
-        "title": "Vetur: Open user scaffold snippet folder"
+			{
+				"command": "vetur.generateGrammar",
+				"title": "Vetur: Generate grammar from `vetur.grammar.customBlocks`"
+			},
+			{
+				"command": "vetur.showCorrespondingVirtualFile",
+				"title": "Vetur: Show corresponding virtual file and sourcemap"
+			},
+			{
+				"command": "vetur.openUserScaffoldSnippetFolder",
+				"title": "Vetur: Open user scaffold snippet folder"
 			},
 			{
 				"command": "extension.demo.getCurrentFilePath",
@@ -40,7 +40,7 @@
 					"dark": "./icon/package.svg"
 				}
 			}
-    ],
+		],
 		"languages": [
 			{
 				"id": "owo",
@@ -83,19 +83,19 @@
 				}
 			},
 			{
-        "path": "./syntaxes/pug/directives.tmLanguage.json",
-        "scopeName": "vue.pug.directives",
-        "injectTo": [
-          "source.owo"
-        ]
-      },
-      {
-        "path": "./syntaxes/pug/interpolations.tmLanguage.json",
-        "scopeName": "vue.pug.interpolations",
-        "injectTo": [
-          "source.owo"
-        ]
-      }
+				"path": "./syntaxes/pug/directives.tmLanguage.json",
+				"scopeName": "vue.pug.directives",
+				"injectTo": [
+					"source.owo"
+				]
+			},
+			{
+				"path": "./syntaxes/pug/interpolations.tmLanguage.json",
+				"scopeName": "vue.pug.interpolations",
+				"injectTo": [
+					"source.owo"
+				]
+			}
 		],
 		"menus": {
 			"editor/title": [
@@ -113,12 +113,20 @@
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.6",
-		"@types/node": "^10.12.21",
+		"@types/node": "^12.12.21",
 		"@types/vscode": "^1.39.0",
 		"eslint": "^5.13.0",
 		"glob": "^7.1.4",
 		"mocha": "^6.1.4",
 		"typescript": "^3.3.1",
 		"vscode-test": "^1.2.0"
+	},
+	"dependencies": {
+		"lodash": "^4.17.15",
+		"vscode": "^1.1.36",
+		"vscode-css-languageservice": "^4.0.2",
+		"vscode-languageclient": "^5.2.1",
+		"vscode-languageserver": "^5.2.1",
+		"vscode-languageserver-types": "^3.14.0"
 	}
 }
